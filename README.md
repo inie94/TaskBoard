@@ -14,4 +14,4 @@ In this project I mastered:
 
 # Documentation
 
-Checkout the [Wiki page](https://github.com/inie94/TaskBoard.wiki.git)
+Checkout the [Wiki page](/inie94/TaskBoard.wiki.git)
