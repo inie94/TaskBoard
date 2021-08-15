@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+</head>
+<body>
+    <h1>User Info</h1>
+    <p th:text="${'Firstname: ' + user.firstname}">Value</p>
+    <p th:text="${'Lastname: ' + user.lastname}">Value</p>
+    <p th:text="${'Email: ' + user.email}">Value</p>
+    <p th:text="${'Gender: ' + user.gender}">Value</p>
+    <p th:text="${'Date of birth: ' + user.dateOfBirth}">Value</p>
+<!--    <p th:text="${'Subscribers: ' + user.subscribers}">Value</p>-->
+<!--    <p th:text="${'Subscriptions: ' + user.subscriptions}">Value</p>-->
+</body>
+</html>
