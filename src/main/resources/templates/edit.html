@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form method="post" th:action="@{/id{id}/edit(id=${authorizedUser.id})}" th:object="${user}" >
+            <p>
+                <label for="firstname">First name: </label>
+                <input style="margin-left: 66px;" type="text" id="firstname" th:field="*{firstname}" th:placeholder="${authorizedUser.firstname}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('firstname')}">First name error</div>-->
+            </p>
+            <p>
+                <label for="lastname">Last name: </label>
+                <input style="margin-left: 68px;" type="text" id="lastname" th:field="*{lastname}" th:placeholder="${authorizedUser.lastname}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('lastname')}">Last name error</div>-->
+            </p>
+            <p>
+                <label for="email">Email: </label>
+                <input style="margin-left: 96px;" type="text" th:field="*{email}" id="email" th:placeholder="${authorizedUser.email}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('email')}">Email error</div>-->
+            </p>
+            <p>
+                <label for="gender">Gender: </label>
+                <input style="margin-left: 87px;" type="text" th:field="*{gender}" id="gender" th:placeholder="${authorizedUser.gender}"/>
+                <!--        <div style="color:red" th:each="err : ${#fields.errors('gender')}">Gender error</div>-->
+            </p>
+            <p>
+                <label for="password">Password: </label>
+                <input style="margin-left: 74px;" type="text" th:field="*{password}" id="password" th:placeholder="${authorizedUser.password}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('password')}">Password error</div>-->
+            </p>
+            <p>
+                <label for="repeatPassword">Repeat password: </label>
+                <input style="margin-left: 26px;" type="text" th:field="*{repeatPassword}" id="repeatPassword" th:placeholder="${authorizedUser.password}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('repeatPassword')}">Repeat password error</div>-->
+            </p>
+            <p>
+                <label for="dateOfBirth">Date of birth: </label>
+                <input style="margin-left: 54px;" type="text" th:field="*{dateOfBirth}" id="dateOfBirth" th:placeholder="${authorizedUser.dateOfBirth}"/>
+                <!--            <div style="color:red" th:each="err : ${#fields.errors('dateOfBirth')}">Date of birth error</div>-->
+            </p>
+            <p><input type="submit" placeholder="Submit" /> <input type="reset" placeholder="Reset" /></p>
+        </form>
+    </body>
+</html>
