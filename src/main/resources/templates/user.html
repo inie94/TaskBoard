@@ -5,13 +5,39 @@
     <title>User Page</title>
 </head>
 <body>
-    <h1>User Info</h1>
+    <h1 th:text="${'id' + user.id + ' ' + user.firstname + ' ' + user.lastname}">Value</h1>
+
+    <div th:unless="${authorizedUser.equals(user)}">
+        <div th:unless="${authorizedUser.subscriptions.contains(user)}">
+            <form method="post" th:action="@{/id{id}/subscribe(id = ${user.id})}">
+                <input type="submit" value="Subscribe">
+            </form>
+        </div>
+        <div th:if="${authorizedUser.subscriptions.contains(user)}">
+            <form method="post" th:action="@{/id{id}/unsubscribe(id = ${user.id})}">
+                <input type="submit" value="Unsubscribe">
+            </form>
+        </div>
+    </div>
+
     <p th:text="${'Firstname: ' + user.firstname}">Value</p>
     <p th:text="${'Lastname: ' + user.lastname}">Value</p>
     <p th:text="${'Email: ' + user.email}">Value</p>
     <p th:text="${'Gender: ' + user.gender}">Value</p>
     <p th:text="${'Date of birth: ' + user.dateOfBirth}">Value</p>
-<!--    <p th:text="${'Subscribers: ' + user.subscribers}">Value</p>-->
-<!--    <p th:text="${'Subscriptions: ' + user.subscriptions}">Value</p>-->
+    <p th:text="${'Subscribers: '}">Value</p>
+    <div th:each="subscriber : ${subscribers}">
+            <form method="post" th:action="@{/id{id}/subscribe(id = ${subscriber.id})}">
+                <label th:text="${subscriber.email}">Value</label>
+                <input th:if="${authorizedUser.equals(user)}" th:unless="${subscriptions.contains(subscriber)}" type="submit" value="Subscribe">
+            </form>
+    </div>
+    <p th:text="${'Subscriptions: '}">Value</p>
+    <div th:each="subscription : ${subscriptions}">
+        <form method="post" th:action="@{/id{id}/unsubscribe(id = ${subscription.id})}">
+            <label th:text="${subscription.email}">Value</label>
+            <input th:if="${authorizedUser.equals(user)}" th:unless="${subscribers.contains(subscription)}" type="submit" value="Unsubscribe">
+        </form>
+    </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import ru.inie.taskboard.entity.User;
 import ru.inie.taskboard.repositories.UserRepository;
 
 import java.text.SimpleDateFormat;
+import java.util.function.Supplier;
 
 @Service
 public class UserService {
@@ -46,5 +47,19 @@ public class UserService {
 
     public User findByEmail(String email) {
         return repository.findByEmail(email).get();
+    }
+
+    public User findById(long id) {
+        return repository.findById(id).get();
+    }
+
+    public void subscribe(User authorizedUser, User user) {
+        user.getSubscribers().add(authorizedUser);
+        repository.save(user);
+    }
+
+    public void unsubscribe(User authorizedUser, User user) {
+        user.getSubscribers().remove(authorizedUser);
+        repository.save(user);
     }
 }
