@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1 th:text="${'id' + user.id + ' ' + user.firstname + ' ' + user.lastname}">Value</h1>
-
+    <a th:if="${authorizedUser.equals(user)}" th:href="@{/id{id}/edit(id = ${user.id})}">Edit profile</a>
     <div th:unless="${authorizedUser.equals(user)}">
         <div th:unless="${authorizedUser.subscriptions.contains(user)}">
             <form method="post" th:action="@{/id{id}/subscribe(id = ${user.id})}">
