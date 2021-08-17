@@ -46,19 +46,19 @@ public class UserController {
 
         userService.subscribe(authorizedUser, user);
 
-        return "redirect:/id" + authorizedUser.getId();
+        return "redirect:/id" + id;
     }
 
     @PostMapping("/id{id}/unsubscribe")
     public String unsubscribe(@PathVariable("id") long id,
-                            Principal principal) {
+                              Principal principal) {
 
         User authorizedUser = userService.findByEmail(principal.getName());
         User user = userService.findById(id);
 
         userService.unsubscribe(authorizedUser, user);
 
-        return "redirect:/id" + authorizedUser.getId();
+        return "redirect:/id" + id;
     }
 
     @GetMapping("/id{id}/edit")
@@ -96,7 +96,7 @@ public class UserController {
             }
 
             userRepresentation.setId(authorizedUser.getId());
-            userService.create(userRepresentation);
+            userService.update(userRepresentation, authorizedUser);
         }
 
         return "redirect:/id" + authorizedUser.getId();

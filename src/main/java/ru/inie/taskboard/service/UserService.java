@@ -61,4 +61,40 @@ public class UserService {
         user.getSubscribers().remove(authorizedUser);
         repository.save(user);
     }
+
+    public void update (UserRepresentation userRepresentation, User user) {
+        String text;
+        if (!(text = userRepresentation.getFirstname()).equals("")) {
+            user.setFirstname(text);
+        }
+        if (!(text = userRepresentation.getLastname()).equals("")) {
+            user.setLastname(text);
+        }
+        if (!(text = userRepresentation.getEmail()).equals("")) {
+            user.setEmail(text);
+
+        }
+        if (!(text = userRepresentation.getGender()).equals("")) {
+            user.setGender(text);
+        }
+
+        if (!(text = userRepresentation.getDateOfBirth()).equals("")) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            java.util.Date utilDate;
+            java.sql.Date sqlDate;
+            try {
+                utilDate = format.parse(userRepresentation.getDateOfBirth());
+                sqlDate = new java.sql.Date(utilDate.getTime());
+                user.setDateOfBirth(sqlDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!(text = userRepresentation.getPassword()).equals("")) {
+            user.setPassword(passwordEncoder.encode(text));
+        }
+
+        repository.save(user);
+    }
 }
