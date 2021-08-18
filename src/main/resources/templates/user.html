@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>User Page</title>
-</head>
-<body>
-    <h1 th:text="${'id' + user.id + ' ' + user.firstname + ' ' + user.lastname}">Value</h1>
-    <a th:if="${authorizedUser.equals(user)}" th:href="@{/id{id}/edit(id = ${user.id})}">Edit profile</a>
-    <div th:unless="${authorizedUser.equals(user)}">
-        <div th:unless="${authorizedUser.subscriptions.contains(user)}">
-            <form method="post" th:action="@{/id{id}/subscribe(id = ${user.id})}">
-                <input type="submit" value="Subscribe">
-            </form>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+              crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <title>User Page</title>
+    </head>
+    <body>
+        <h1 th:text="${'id' + user.id + ' ' + user.firstname + ' ' + user.lastname}">Value</h1>
+        <a th:if="${authorizedUser.equals(user)}" th:href="@{/id{id}/edit(id = ${user.id})}">Edit profile</a>
+        <div th:unless="${authorizedUser.equals(user)}">
+            <div th:unless="${authorizedUser.subscriptions.contains(user)}">
+                <form method="post" th:action="@{/id{id}/subscribe(id = ${user.id})}">
+                    <input type="submit" value="Subscribe">
+                </form>
+            </div>
+            <div th:if="${authorizedUser.subscriptions.contains(user)}">
+                <form method="post" th:action="@{/id{id}/unsubscribe(id = ${user.id})}">
+                    <input type="submit" value="Unsubscribe">
+                </form>
+            </div>
         </div>
-        <div th:if="${authorizedUser.subscriptions.contains(user)}">
-            <form method="post" th:action="@{/id{id}/unsubscribe(id = ${user.id})}">
-                <input type="submit" value="Unsubscribe">
-            </form>
-        </div>
-    </div>
 
-    <p th:text="${'Firstname: ' + user.firstname}">Value</p>
-    <p th:text="${'Lastname: ' + user.lastname}">Value</p>
-    <p th:text="${'Email: ' + user.email}">Value</p>
-    <p th:text="${'Gender: ' + user.gender}">Value</p>
-    <p th:text="${'Date of birth: ' + user.dateOfBirth}">Value</p>
-    <div th:unless="${user.subscribers.isEmpty()}">
-        <p th:text="${'Subscribers: '}">Value</p>
-        <div th:each="subscriber : ${user.subscribers}">
-            <form method="post" th:action="@{/id{id}/subscribe(id = ${subscriber.id})}">
-                <label th:text="${subscriber.email}">Value</label>
-                <input th:if="${authorizedUser.equals(user)}" th:unless="${user.subscriptions.contains(subscriber)}" type="submit" value="Subscribe">
-            </form>
+        <p th:text="${'Firstname: ' + user.firstname}">Value</p>
+        <p th:text="${'Lastname: ' + user.lastname}">Value</p>
+        <p th:text="${'Email: ' + user.email}">Value</p>
+        <p th:text="${'Gender: ' + user.gender}">Value</p>
+        <p th:text="${'Date of birth: ' + user.dateOfBirth}">Value</p>
+        <div th:unless="${user.subscribers.isEmpty()}">
+            <p th:text="${'Subscribers: '}">Value</p>
+            <div th:each="subscriber : ${user.subscribers}">
+                <form method="post" th:action="@{/id{id}/subscribe(id = ${subscriber.id})}">
+                    <label th:text="${subscriber.email}">Value</label>
+                    <input th:if="${authorizedUser.equals(user)}"
+                           th:unless="${user.subscriptions.contains(subscriber)}"
+                           type="submit" value="Subscribe">
+                </form>
+            </div>
         </div>
-    </div>
-    <div th:unless="${user.subscriptions.isEmpty()}">
-        <p th:text="${'Subscriptions: '}">Value</p>
-        <div th:each="subscription : ${user.subscriptions}">
-            <form method="post" th:action="@{/id{id}/unsubscribe(id = ${subscription.id})}">
-                <label th:text="${subscription.email}">Value</label>
-                <input th:if="${authorizedUser.equals(user)}" th:unless="${user.subscribers.contains(subscription)}" type="submit" value="Unsubscribe">
-            </form>
+        <div th:unless="${user.subscriptions.isEmpty()}">
+            <p th:text="${'Subscriptions: '}">Value</p>
+            <div th:each="subscription : ${user.subscriptions}">
+                <form method="post" th:action="@{/id{id}/unsubscribe(id = ${subscription.id})}">
+                    <label th:text="${subscription.email}">Value</label>
+                    <input th:if="${authorizedUser.equals(user)}"
+                           th:unless="${user.subscribers.contains(subscription)}"
+                           type="submit" value="Unsubscribe">
+                </form>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
