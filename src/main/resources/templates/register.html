@@ -9,44 +9,43 @@
         <title>Registration</title>
     </head>
     <body>
-        <h1>Registration</h1>
-        <form method="post" th:action="@{/register}" th:object="${user}" >
-            <p>
-                <label for="firstname">First name: </label>
-                <input style="margin-left: 66px;" type="text" id="firstname" th:field="*{firstname}">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('firstname')}">First name error</div>-->
-            </p>
-            <p>
-                <label for="lastname">Last name: </label>
-                <input style="margin-left: 68px;" type="text" id="lastname" th:field="*{lastname}">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('lastname')}">Last name error</div>-->
-            </p>
-            <p>
-                <label for="email">Email: </label>
-                <input style="margin-left: 96px;" type="text" th:field="*{email}" id="email">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('email')}">Email error</div>-->
-            </p>
-            <p>
-                <label for="gender">Gender: </label>
-                <input style="margin-left: 87px;" type="text" th:field="*{gender}" id="gender">
-    <!--        <div style="color:red" th:each="err : ${#fields.errors('gender')}">Gender error</div>-->
-            </p>
-            <p>
-                <label for="password">Password: </label>
-                <input style="margin-left: 74px;" type="text" th:field="*{password}" id="password">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('password')}">Password error</div>-->
-            </p>
-            <p>
-                <label for="repeatPassword">Repeat password: </label>
-                <input style="margin-left: 26px;" type="text" th:field="*{repeatPassword}" id="repeatPassword">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('repeatPassword')}">Repeat password error</div>-->
-            </p>
-            <p>
-                <label for="dateOfBirth">Date of birth: </label>
-                <input style="margin-left: 54px;" type="text" th:field="*{dateOfBirth}" id="dateOfBirth">
-    <!--            <div style="color:red" th:each="err : ${#fields.errors('dateOfBirth')}">Date of birth error</div>-->
-            </p>
-            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-        </form>
+
+            <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                <div class="container-fluid vertical-center horizontal-center">
+                    <div class="row justify-content-center align-self-center ">
+                        <form class="col-md-3" th:action="@{/register}" th:object="${user}" method="post">
+                            <div class="form-floating">
+                                <h1 class="text-center fw-bold">Registration</h1>
+                                <br>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="firstname" th:field="*{firstname}" placeholder="First name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="lastname" th:field="*{lastname}" placeholder="Last name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="email" th:field="*{email}" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="gender" th:field="*{gender}" placeholder="Gender">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="password" th:field="*{password}"  placeholder="Password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="repeatPassword" th:field="*{repeatPassword}" placeholder="Repeat password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="search" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}"  placeholder="Date of birth">
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <input class="btn btn-primary btn" type="submit" value="Submit">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
     </body>
 </html>

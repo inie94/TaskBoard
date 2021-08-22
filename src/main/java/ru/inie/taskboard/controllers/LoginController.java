@@ -47,12 +47,4 @@ public class LoginController {
         userService.create(userRepresentation);
         return "redirect:/login";
     }
-
-    @GetMapping("feed")
-    public String userInfo(Model model,
-                           Principal principal) {
-        User user = userService.findByEmail(principal.getName());
-        model.addAttribute("user", user);
-        return "feed";
-    }
 }

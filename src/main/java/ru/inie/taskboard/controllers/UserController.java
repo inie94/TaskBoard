@@ -11,6 +11,9 @@ import ru.inie.taskboard.service.UserRepresentation;
 import ru.inie.taskboard.service.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 //@RequestMapping("user")
@@ -21,6 +24,19 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("feed")
+    public String userInfo(Model model,
+                           Principal principal) {
+        User authorizedUser = userService.findByEmail(principal.getName());
+        UserRepresentation userRepresentation = new UserRepresentation();
+        model.addAttribute("authorizedUser", authorizedUser);
+        model.addAttribute("user", userRepresentation);
+        Set<User> friends = authorizedUser.getSubscribers();
+        friends.retainAll(authorizedUser.getSubscriptions());
+        model.addAttribute("friends", friends);
+        return "feed";
     }
 
     @GetMapping("/id{id}")
@@ -78,16 +94,13 @@ public class UserController {
         return "redirect:/id" + authorizedUser.getId();
     }
 
-    @PostMapping("/id{id}/edit")
-    public String editUser(@PathVariable("id") long id,
-                           Principal principal,
+    @PostMapping("/edit-profile")
+    public String editUser(Principal principal,
                            Model model,
                            @ModelAttribute("user") UserRepresentation userRepresentation,
                            BindingResult bindingResult) {
         User authorizedUser = userService.findByEmail(principal.getName());
-        User user = userService.findById(id);
 
-        if (authorizedUser.equals(user)) {
             if(bindingResult.hasErrors())
                 return "edit";
             if(!userRepresentation.getPassword().equals(userRepresentation.getRepeatPassword())) {
@@ -95,10 +108,8 @@ public class UserController {
                 return "edit";
             }
 
-            userRepresentation.setId(authorizedUser.getId());
             userService.update(userRepresentation, authorizedUser);
-        }
 
-        return "redirect:/id" + authorizedUser.getId();
+        return "redirect:/feed";
     }
 }

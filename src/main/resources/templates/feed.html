@@ -9,15 +9,300 @@
         <title>Feed Page</title>
     </head>
     <body>
-    <div class="d-flex vh-100">
-    <nav class="nav-fluid flex-column navbar-dark bg-dark">
-        <a class="nav-link active" aria-current="page" th:href="@{/id{id}(id = ${user.id})}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="50" fill="#ffff" class="bi bi-person-badge" viewBox="0 0 16 16">
-                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
-            </svg>
-        </a>
-    </nav>
+        <div class="d-flex vh-100">
+            <nav class="nav flex-column navbar-dark bg-dark" id="navigationSidebar">
+                <div class="nav-item">
+                    <a id="btn1" class="nav-link" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-controls="collapseOne"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="45" fill="#ffff" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a id="btn2" class="nav-link" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-controls="collapseTwo"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="45" fill="#ffff" class="bi bi-people-fill" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Collapse Profile content -->
+                <div class="collapse navbar-collapse collapse-horizontal border-start border-secondary position-relative"
+                    id="collapseOne" data-bs-parent="#navigationSidebar">
+                    <div class="container flex-column bg-dark vh-100">
+                        <div class="row rowBg align-items-center" style="height: 60px;">
+                            <div class="col-10">
+                                <h4 class="text-white h4 fw-bold align-items-center"
+                                    th:text="${authorizedUser.firstname + ' ' + authorizedUser.lastname}">
+                                        Firstname Lastname
+                                </h4>
+                            </div>
+                            <div class="col-1">
+                                <a class="link" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 1 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <span class="text-muted">
+                            <p th:text="${'Email: ' + authorizedUser.email}">Email: testemail@gmail.com</p>
+                            <p th:text="${'Gender: ' + authorizedUser.gender}">Gender: Male</p>
+                            <p th:text="${'Date of birth: ' + authorizedUser.dateOfBirth}">Date of birth: 1994/08/17</p>
+                        </span>
+                    </div>
+                </div>
+                <!-- Collapse Friends content -->
+                <div class="collapse navbar-collapse collapse-horizontal border-start border-secondary position-relative"
+                    id="collapseTwo" data-bs-parent="#navigationSidebar">
+                    <div class="container flex-column bg-dark vh-100">
+                        <div class="row rowBg align-items-center" style="height: 60px;">
+                            <div class="col-10">
+                                <h4 class="text-white h4 fw-bold align-items-center"
+                                th:text="${'Friends'}">
+                                    Friends
+                                </h4>
+                            </div>
+                        </div>
+
+                        <span class="text-muted">
+                            <p th:text="${'Friends count: ' + friends.size()}">Friends count: 16</p>
+                        </span>
+
+                        <div class="card-group" style="width: 18rem;">
+                            <div th:each="friend : ${friends}">
+                                <div class="card rounded-0 border-top-0 border-bottom-1 border-start-0 border-end-0 bg-dark" style="width: 18rem;">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col">
+                                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG9ydHJhaXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+                                                 class="img-fluid rounded-circle"
+                                                 alt="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG9ydHJhaXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+                                                 style="width: 65px; height: 65px;">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h6 class="card-title text-white" th:text="${friend.firstname + ' ' + friend.lastname}">Firstname Lastname</h6>
+                                                <p class="card-text text-white text-truncate" th:text="${friend.email}">testemasdfadfadfsaail@gmail.com</p>
+    <!--                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid bg-primary overflow-auto">
+<!--                <div class="row row-cols-1 row-cols-md-3 g-4">-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img src="..." class="card-img-top" alt="...">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Card title</h5>-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer">-->
+<!--                                <small class="text-muted">Last updated 3 mins ago</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <form method="post" th:action="@{/edit-profile}"
+                      th:object="${user}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        th:text="${'Edit user id' + authorizedUser.id}">Modal title
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab"
+                                        aria-controls="profile" aria-selected="false">
+                                    Profile
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="email-password-tab" data-bs-toggle="tab"
+                                        data-bs-target="#email-password" type="button" role="tab"
+                                        aria-controls="email&password" aria-selected="true">
+                                    Email & Password
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#contact" type="button" role="tab"
+                                        aria-controls="contact" aria-selected="false">
+                                    Contact
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                                 aria-labelledby="profile-tab">
+                                <br>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="firstname"
+                                           aria-describedby="basic-addon3" th:field="*{firstname}"
+                                           placeholder="First name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="lastname"
+                                           aria-describedby="basic-addon3" th:field="*{lastname}"
+                                           placeholder="Last name">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="gender"
+                                           aria-describedby="basic-addon3" th:field="*{gender}"
+                                           placeholder="Gender">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="date-of-birth"
+                                           aria-describedby="basic-addon3" th:field="*{dateOfBirth}"
+                                           placeholder="Date of birth">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="email-password" role="tabpanel"
+                                 aria-labelledby="email-password-tab" >
+                                <br>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="email"
+                                           aria-describedby="basic-addon3" th:field="*{email}"
+                                           placeholder="Email">
+                                </div>
+                                <hr>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="password"
+                                           aria-describedby="basic-addon3" th:field="*{password}"
+                                           placeholder="Password">
+                                </div>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="repeat-password"
+                                           aria-describedby="basic-addon3" th:field="*{repeatPassword}"
+                                           placeholder="Repeat password">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel"
+                                 aria-labelledby="contact-tab">...</div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
     </body>
 </html>
